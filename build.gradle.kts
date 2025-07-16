@@ -20,6 +20,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-graphql")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("com.graphql-java-kickstart:graphiql-spring-boot-starter:11.1.0")
 
 	runtimeOnly("com.mysql:mysql-connector-j")
 
