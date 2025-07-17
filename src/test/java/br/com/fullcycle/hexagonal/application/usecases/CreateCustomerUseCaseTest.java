@@ -1,7 +1,6 @@
 package br.com.fullcycle.hexagonal.application.usecases;
 
-import br.com.fullcycle.hexagonal.application.application.CreateCustomerUseCase;
-import br.com.fullcycle.hexagonal.application.application.exceptions.ValidationException;
+import br.com.fullcycle.hexagonal.application.exceptions.ValidationException;
 import br.com.fullcycle.hexagonal.models.Customer;
 import br.com.fullcycle.hexagonal.services.CustomerService;
 import org.junit.jupiter.api.Assertions;
