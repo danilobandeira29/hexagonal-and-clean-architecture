@@ -1,9 +1,9 @@
 package br.com.fullcycle.hexagonal.application.usecases;
 
 import br.com.fullcycle.hexagonal.application.exceptions.ValidationException;
-import br.com.fullcycle.hexagonal.models.Customer;
-import br.com.fullcycle.hexagonal.repositories.CustomerRepository;
-import br.com.fullcycle.hexagonal.services.CustomerService;
+import br.com.fullcycle.hexagonal.infrastructure.Main;
+import br.com.fullcycle.hexagonal.infrastructure.models.Customer;
+import br.com.fullcycle.hexagonal.infrastructure.repositories.CustomerRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -16,11 +16,11 @@ import java.util.UUID;
 
 
 @ActiveProfiles("test")
-@SpringBootTest
+@SpringBootTest(classes = Main.class)
 public class CreateCustomerUseCaseTestIT {
 
     @Autowired
-    private CustomerService customerService;
+    private CreateCustomerUseCase useCase;
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -37,7 +37,6 @@ public class CreateCustomerUseCaseTestIT {
         final var expectedEmail = "john.doe@gmail.com";
         final var expectedName = "John Doe";
         var createInput = new CreateCustomerUseCase.Input(expectedCPF, expectedEmail, expectedName);
-        final var useCase = new CreateCustomerUseCase(customerService);
         final var output = useCase.execute(createInput);
         Assertions.assertNotNull(output.id());
         Assertions.assertEquals(expectedCPF, output.cpf());
@@ -58,8 +57,7 @@ public class CreateCustomerUseCaseTestIT {
         aCustomer.setCpf(expectedCPF);
         aCustomer.setEmail(expectedEmail);
         aCustomer.setName(expectedName);
-        customerService.save(aCustomer);
-        final var useCase = new CreateCustomerUseCase(customerService);
+        customerRepository.save(aCustomer);
         final var actualException = Assertions.assertThrows(ValidationException.class, () -> useCase.execute(createInput));
         Assertions.assertEquals(expectedError, actualException.getMessage());
     }
@@ -76,9 +74,8 @@ public class CreateCustomerUseCaseTestIT {
         aCustomer.setCpf(expectedCPF);
         aCustomer.setEmail(expectedEmail);
         aCustomer.setName(expectedName);
-        customerService.save(aCustomer);
+        customerRepository.save(aCustomer);
         var createInput = new CreateCustomerUseCase.Input("1234", expectedEmail, expectedName);
-        final var useCase = new CreateCustomerUseCase(customerService);
         final var actualException = Assertions.assertThrows(ValidationException.class, () -> useCase.execute(createInput));
         Assertions.assertEquals(expectedError, actualException.getMessage());
     }
