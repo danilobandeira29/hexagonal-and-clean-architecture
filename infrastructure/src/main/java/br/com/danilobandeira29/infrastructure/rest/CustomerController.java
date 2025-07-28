@@ -1,14 +1,18 @@
 package br.com.danilobandeira29.infrastructure.rest;
 
-import br.com.danilobandeira29.customer.CreateCustomerUseCase;
-import br.com.danilobandeira29.customer.GetCustomerByIdUseCase;
+import br.com.danilobandeira29.application.Presenter;
+import br.com.danilobandeira29.application.customer.CreateCustomerUseCase;
+import br.com.danilobandeira29.application.customer.GetCustomerByIdUseCase;
 import br.com.danilobandeira29.domain.exceptions.ValidationException;
 import br.com.danilobandeira29.infrastructure.dtos.NewCustomerDTO;
+import br.com.danilobandeira29.infrastructure.rest.presenters.GetCustomerByIdResponseEntity;
+import br.com.danilobandeira29.infrastructure.rest.presenters.PublicGetCustomerByIdString;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.Objects;
+import java.util.Optional;
 
 // Driving Adapter
 @RestController
@@ -36,9 +40,11 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> get(@PathVariable String id) {
-        return getCustomerByIdUseCase.execute(new GetCustomerByIdUseCase.Input(id))
-                .map(ResponseEntity::ok)
-                .orElseGet(ResponseEntity.notFound()::build);
+    public Object get(@PathVariable String id, @RequestHeader(name = "X-Public", required = false) String xPublic) {
+        Presenter<Optional<GetCustomerByIdUseCase.Output>, Object> presenter = new GetCustomerByIdResponseEntity();
+        if (xPublic != null) {
+            presenter = new PublicGetCustomerByIdString();
+        }
+        return getCustomerByIdUseCase.execute(new GetCustomerByIdUseCase.Input(id), presenter);
     }
 }

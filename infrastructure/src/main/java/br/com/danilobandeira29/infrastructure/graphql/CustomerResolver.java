@@ -1,7 +1,7 @@
 package br.com.danilobandeira29.infrastructure.graphql;
 
-import br.com.danilobandeira29.customer.CreateCustomerUseCase;
-import br.com.danilobandeira29.customer.GetCustomerByIdUseCase;
+import br.com.danilobandeira29.application.customer.CreateCustomerUseCase;
+import br.com.danilobandeira29.application.customer.GetCustomerByIdUseCase;
 import br.com.danilobandeira29.infrastructure.dtos.NewCustomerDTO;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;

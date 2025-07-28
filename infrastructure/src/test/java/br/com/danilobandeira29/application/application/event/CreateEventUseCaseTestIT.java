@@ -1,9 +1,9 @@
-package br.com.danilobandeira29.application.event;
+package br.com.danilobandeira29.application.application.event;
 
 import br.com.danilobandeira29.domain.exceptions.ValidationException;
 import br.com.danilobandeira29.domain.partner.Partner;
 import br.com.danilobandeira29.domain.partner.PartnerId;
-import br.com.danilobandeira29.event.CreateEventUseCase;
+import br.com.danilobandeira29.application.event.CreateEventUseCase;
 import br.com.danilobandeira29.infrastructure.Main;
 import br.com.danilobandeira29.infrastructure.jpa.entities.PartnerEntity;
 import br.com.danilobandeira29.infrastructure.jpa.repositories.EventJpaRepository;

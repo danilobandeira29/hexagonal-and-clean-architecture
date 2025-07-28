@@ -6,7 +6,7 @@ import br.com.danilobandeira29.domain.event.EventId;
 import br.com.danilobandeira29.domain.event.EventRepository;
 import br.com.danilobandeira29.domain.partner.Partner;
 import br.com.danilobandeira29.domain.partner.PartnerRepository;
-import br.com.danilobandeira29.event.CreateEventUseCase;
+import br.com.danilobandeira29.application.event.CreateEventUseCase;
 import br.com.danilobandeira29.infrastructure.dtos.NewEventDTO;
 import br.com.danilobandeira29.infrastructure.dtos.SubscribeDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;

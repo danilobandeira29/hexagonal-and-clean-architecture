@@ -1,6 +1,6 @@
 package br.com.danilobandeira29.infrastructure;
 
-import br.com.danilobandeira29.customer.GetCustomerByIdUseCase;
+import br.com.danilobandeira29.application.customer.GetCustomerByIdUseCase;
 import br.com.danilobandeira29.infrastructure.dtos.NewCustomerDTO;
 import br.com.danilobandeira29.infrastructure.jpa.repositories.CustomerJpaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,6 +13,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.nio.charset.StandardCharsets;
 
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
@@ -137,5 +139,30 @@ public class CustomerEntityControllerTest {
         Assertions.assertEquals(customer.name(), actualResponse.name());
         Assertions.assertEquals(customer.cpf(), actualResponse.cpf());
         Assertions.assertEquals(customer.email(), actualResponse.email());
+    }
+
+    @Test
+    @DisplayName("Deve obter um cliente por id public")
+    public void testGetPublic() throws Exception {
+
+        var customer = new NewCustomerDTO("John Doe", "123.456.789-01","john.doe@gmail.com");
+
+        final var createResult = this.mvc.perform(
+                        MockMvcRequestBuilders.post("/customers")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(mapper.writeValueAsString(customer))
+                )
+                .andReturn().getResponse().getContentAsByteArray();
+
+        var customerId = mapper.readValue(createResult, GetCustomerByIdUseCase.Input.class).id();
+
+        final var actualResponse = this.mvc.perform(
+                        MockMvcRequestBuilders.get("/customers/{id}", customerId)
+                                .header("X-Public", "true")
+                )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn().getResponse().getContentAsByteArray();
+
+        Assertions.assertEquals(customerId, new String(actualResponse));
     }
 }

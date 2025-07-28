@@ -1,6 +1,6 @@
-package br.com.danilobandeira29.event;
+package br.com.danilobandeira29.application.event;
 
-import br.com.danilobandeira29.UseCase;
+import br.com.danilobandeira29.application.UseCase;
 import br.com.danilobandeira29.domain.customer.CustomerId;
 import br.com.danilobandeira29.domain.customer.CustomerRepository;
 import br.com.danilobandeira29.domain.event.EventId;

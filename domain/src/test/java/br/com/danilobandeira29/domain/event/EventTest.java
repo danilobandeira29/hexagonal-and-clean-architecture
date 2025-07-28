@@ -1,7 +1,6 @@
 package br.com.danilobandeira29.domain.event;
 
 import br.com.danilobandeira29.domain.customer.Customer;
-import br.com.danilobandeira29.domain.event.Event;
 import br.com.danilobandeira29.domain.exceptions.ValidationException;
 import br.com.danilobandeira29.domain.partner.Partner;
 import br.com.danilobandeira29.domain.ticket.TicketStatus;

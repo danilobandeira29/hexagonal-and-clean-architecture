@@ -1,4 +1,4 @@
-package br.com.danilobandeira29.repository;
+package br.com.danilobandeira29.application.repository;
 
 
 

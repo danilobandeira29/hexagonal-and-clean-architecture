@@ -1,6 +1,5 @@
 package br.com.danilobandeira29.domain.customer;
 
-import br.com.danilobandeira29.domain.customer.Customer;
 import br.com.danilobandeira29.domain.exceptions.ValidationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

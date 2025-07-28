@@ -1,7 +1,7 @@
-package br.com.danilobandeira29.event;
+package br.com.danilobandeira29.application.event;
 
-import br.com.danilobandeira29.repository.InMemoryEventRepository;
-import br.com.danilobandeira29.repository.InMemoryPartnerRepository;
+import br.com.danilobandeira29.application.repository.InMemoryEventRepository;
+import br.com.danilobandeira29.application.repository.InMemoryPartnerRepository;
 import br.com.danilobandeira29.domain.exceptions.ValidationException;
 import br.com.danilobandeira29.domain.partner.Partner;
 import br.com.danilobandeira29.domain.partner.PartnerId;

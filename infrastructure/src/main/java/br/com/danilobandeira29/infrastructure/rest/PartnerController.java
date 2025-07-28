@@ -2,8 +2,8 @@ package br.com.danilobandeira29.infrastructure.rest;
 
 import br.com.danilobandeira29.domain.exceptions.ValidationException;
 import br.com.danilobandeira29.infrastructure.dtos.NewPartnerDTO;
-import br.com.danilobandeira29.partner.CreatePartnerUseCase;
-import br.com.danilobandeira29.partner.GetPartnerByIdUseCase;
+import br.com.danilobandeira29.application.partner.CreatePartnerUseCase;
+import br.com.danilobandeira29.application.partner.GetPartnerByIdUseCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

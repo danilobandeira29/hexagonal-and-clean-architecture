@@ -1,7 +1,7 @@
-package br.com.danilobandeira29.customer;
+package br.com.danilobandeira29.application.customer;
 
 
-import br.com.danilobandeira29.UseCase;
+import br.com.danilobandeira29.application.UseCase;
 
 import br.com.danilobandeira29.domain.customer.Customer;
 import br.com.danilobandeira29.domain.customer.CustomerRepository;

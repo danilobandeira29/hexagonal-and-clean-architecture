@@ -1,6 +1,6 @@
-package br.com.danilobandeira29.partner;
+package br.com.danilobandeira29.application.partner;
 
-import br.com.danilobandeira29.UseCase;
+import br.com.danilobandeira29.application.UseCase;
 import br.com.danilobandeira29.domain.exceptions.ValidationException;
 import br.com.danilobandeira29.domain.partner.Partner;
 import br.com.danilobandeira29.domain.partner.PartnerRepository;

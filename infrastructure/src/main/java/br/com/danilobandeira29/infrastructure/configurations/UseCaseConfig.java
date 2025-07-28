@@ -1,15 +1,15 @@
 package br.com.danilobandeira29.infrastructure.configurations;
 
-import br.com.danilobandeira29.customer.CreateCustomerUseCase;
-import br.com.danilobandeira29.customer.GetCustomerByIdUseCase;
+import br.com.danilobandeira29.application.customer.CreateCustomerUseCase;
+import br.com.danilobandeira29.application.customer.GetCustomerByIdUseCase;
 import br.com.danilobandeira29.domain.customer.CustomerRepository;
 import br.com.danilobandeira29.domain.event.EventRepository;
 import br.com.danilobandeira29.domain.partner.PartnerRepository;
 import br.com.danilobandeira29.domain.ticket.TicketRepository;
-import br.com.danilobandeira29.event.CreateEventUseCase;
-import br.com.danilobandeira29.event.SubscribeCustomerToEventUseCase;
-import br.com.danilobandeira29.partner.CreatePartnerUseCase;
-import br.com.danilobandeira29.partner.GetPartnerByIdUseCase;
+import br.com.danilobandeira29.application.event.CreateEventUseCase;
+import br.com.danilobandeira29.application.event.SubscribeCustomerToEventUseCase;
+import br.com.danilobandeira29.application.partner.CreatePartnerUseCase;
+import br.com.danilobandeira29.application.partner.GetPartnerByIdUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

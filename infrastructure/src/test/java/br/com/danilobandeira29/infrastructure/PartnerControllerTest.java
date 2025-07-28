@@ -2,8 +2,8 @@ package br.com.danilobandeira29.infrastructure;
 
 import br.com.danilobandeira29.domain.partner.PartnerRepository;
 import br.com.danilobandeira29.infrastructure.dtos.NewPartnerDTO;
-import br.com.danilobandeira29.partner.CreatePartnerUseCase;
-import br.com.danilobandeira29.partner.GetPartnerByIdUseCase;
+import br.com.danilobandeira29.application.partner.CreatePartnerUseCase;
+import br.com.danilobandeira29.application.partner.GetPartnerByIdUseCase;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;

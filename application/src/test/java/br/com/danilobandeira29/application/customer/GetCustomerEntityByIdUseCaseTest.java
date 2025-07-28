@@ -1,6 +1,6 @@
-package br.com.danilobandeira29.customer;
+package br.com.danilobandeira29.application.customer;
 
-import br.com.danilobandeira29.repository.InMemoryCustomerRepository;
+import br.com.danilobandeira29.application.repository.InMemoryCustomerRepository;
 import br.com.danilobandeira29.domain.customer.Customer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

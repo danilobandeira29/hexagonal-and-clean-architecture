@@ -1,5 +1,5 @@
-package br.com.danilobandeira29.application.customer;
-import br.com.danilobandeira29.customer.CreateCustomerUseCase;
+package br.com.danilobandeira29.application.application.customer;
+import br.com.danilobandeira29.application.customer.CreateCustomerUseCase;
 import br.com.danilobandeira29.domain.exceptions.ValidationException;
 import br.com.danilobandeira29.infrastructure.Main;
 import br.com.danilobandeira29.infrastructure.jpa.entities.CustomerEntity;
