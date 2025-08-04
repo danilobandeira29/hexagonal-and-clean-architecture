@@ -11,8 +11,8 @@ import java.net.URI;
 import java.util.Objects;
 
 // Driving Adapter
-@RestController
-@RequestMapping(value = "partners")
+//@RestController
+//@RequestMapping(value = "partners")
 public class PartnerController {
 
     private final CreatePartnerUseCase createPartnerUseCase;
