@@ -17,19 +17,20 @@ public class EventTest {
     public void testReserveTicketForCustomer() {
         final var expectedDate = "2025-01-01";
         final var expectedTicketOrder = 1;
-        final var expectedTicketStatus = TicketStatus.PENDING;
+        final var expectedDomainEvent = "event-ticket.reserved";
         final var aPartner = Partner.newPartner("Partner Name", "41.536.538/0001-00", "partner@email.com");
         final var anEvent = Event.newEvent("Event name", expectedDate, 10, aPartner);
         final var aCustomer = Customer.newCustomer( "John Doe", "123.456.789-01", "john.doe@gmail.com");
         final var ticket = anEvent.reserveTicket(aCustomer.id());
         final var actualTicketEvent = anEvent.allTickets().iterator().next();
-        Assertions.assertNotNull(ticket.id());
+        Assertions.assertNotNull(ticket.eventTicketId());
         Assertions.assertEquals(expectedDate, anEvent.date().format(DateTimeFormatter.ISO_LOCAL_DATE));
         Assertions.assertEquals(anEvent.id(), ticket.eventId());
         Assertions.assertEquals(aCustomer.id(), ticket.customerId());
         Assertions.assertEquals(expectedTicketOrder, actualTicketEvent.ordering());
-        Assertions.assertEquals(ticket.id(), actualTicketEvent.id());
-        Assertions.assertEquals(expectedTicketStatus, ticket.status());
+        Assertions.assertEquals(ticket.eventTicketId(), actualTicketEvent.eventTicketId());
+        final var actualDomainEvents = anEvent.allDomainEvents().iterator().next();
+        Assertions.assertEquals(expectedDomainEvent, actualDomainEvents.type());
     }
 
     @Test

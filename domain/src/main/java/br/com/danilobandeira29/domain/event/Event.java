@@ -1,9 +1,9 @@
 package br.com.danilobandeira29.domain.event;
 
+import br.com.danilobandeira29.domain.DomainEvent;
 import br.com.danilobandeira29.domain.person.Name;
 import br.com.danilobandeira29.domain.partner.Partner;
 import br.com.danilobandeira29.domain.partner.PartnerId;
-import br.com.danilobandeira29.domain.ticket.Ticket;
 import br.com.danilobandeira29.domain.customer.CustomerId;
 import br.com.danilobandeira29.domain.exceptions.ValidationException;
 
@@ -22,7 +22,8 @@ public class Event {
     private LocalDate date;
     private int totalSpots;
     private PartnerId partnerId;
-    private Set<EventTicket> tickets;
+    private final Set<EventTicket> eventTickets;
+    private final Set<DomainEvent> domainEvents;
 
     public Event(
             final EventId id,
@@ -30,21 +31,22 @@ public class Event {
             final String date,
             final Integer totalSpots,
             final PartnerId partnerId,
-            final Set<EventTicket> tickets
+            final Set<EventTicket> eventTickets
     ) {
-        this(id, tickets);
+        this(id, eventTickets);
         this.setName(name);
         this.setDate(date);
         this.setTotalSpots(totalSpots);
         this.setPartnerId(partnerId);
     }
 
-    private Event(final EventId id, final Set<EventTicket> tickets) {
+    private Event(final EventId id, final Set<EventTicket> eventTickets) {
         if (id == null) {
             throw new ValidationException("Invalid id for Event");
         }
         this.id = id;
-        this.tickets = tickets != null ? tickets : new HashSet<>(0);
+        this.eventTickets = eventTickets != null ? eventTickets : new HashSet<>(0);
+        this.domainEvents = new HashSet<>(2);
     }
 
     public static Event restore(
@@ -94,7 +96,11 @@ public class Event {
     }
 
     public Set<EventTicket> allTickets() {
-        return Collections.unmodifiableSet(tickets);
+        return Collections.unmodifiableSet(eventTickets);
+    }
+
+    public Set<DomainEvent> allDomainEvents() {
+        return Collections.unmodifiableSet(domainEvents);
     }
 
     private void setName(final String name) {
@@ -126,7 +132,7 @@ public class Event {
         this.totalSpots = totalSpots;
     }
 
-    public Ticket reserveTicket(final CustomerId customerId) {
+    public EventTicket reserveTicket(final CustomerId customerId) {
        this.allTickets()
                 .stream()
                 .filter(it -> Objects.equals(it.customerId(), customerId))
@@ -136,15 +142,9 @@ public class Event {
         if (totalSpots() < allTickets().size() + ONE) {
             throw new ValidationException("Event sold out");
         }
-        final var newTicket = Ticket.newTicket(customerId, id());
-        this.tickets.add(
-                new EventTicket(
-                        newTicket.id(),
-                        newTicket.eventId(),
-                        newTicket.customerId(),
-                        allTickets().size()+1
-                )
-        );
-        return newTicket;
+        final var aEventTicket = EventTicket.newTicket(id(), customerId, allTickets().size() +1);
+        this.eventTickets.add(aEventTicket);
+        this.domainEvents.add(new EventTicketReserved(aEventTicket.eventTicketId(), id(), customerId));
+        return aEventTicket;
     }
 }
