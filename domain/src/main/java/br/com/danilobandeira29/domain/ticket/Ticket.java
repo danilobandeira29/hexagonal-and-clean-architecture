@@ -1,11 +1,16 @@
 package br.com.danilobandeira29.domain.ticket;
 
+import br.com.danilobandeira29.domain.DomainEvent;
 import br.com.danilobandeira29.domain.customer.CustomerId;
 import br.com.danilobandeira29.domain.event.EventId;
+import br.com.danilobandeira29.domain.event.EventTicketId;
 import br.com.danilobandeira29.domain.exceptions.ValidationException;
 
 import java.time.Instant;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Ticket {
 
@@ -15,6 +20,7 @@ public class Ticket {
     private TicketStatus status;
     private Instant paidAt;
     private Instant reservedAt;
+    private final Set<DomainEvent> domainEvents;
 
     public Ticket(
             final TicketId id,
@@ -30,6 +36,11 @@ public class Ticket {
         this.setStatus(status);
         this.setPaidAt(paidAt);
         this.setReservedAt(reservedAt);
+        this.domainEvents = new HashSet<>();
+    }
+
+    public Set<DomainEvent> allDomainEvents() {
+        return Collections.unmodifiableSet(domainEvents);
     }
 
     @Override
@@ -46,6 +57,12 @@ public class Ticket {
 
     public static Ticket newTicket(final CustomerId customerId, final EventId eventId) {
         return new Ticket(TicketId.unique(), customerId, eventId, TicketStatus.PENDING, null, Instant.now());
+    }
+
+    public static Ticket newTicket(final EventTicketId eventTicketId, final CustomerId customerId, final EventId eventId) {
+        final var aTicket = newTicket(customerId, eventId);
+        aTicket.domainEvents.add(new TicketCreated(aTicket.id, eventTicketId, eventId, customerId));
+        return aTicket;
     }
 
     public TicketId id() {
